@@ -43,6 +43,24 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             publish_dir: newman/
 
+      - name: Send email notifications
+        if: always()
+        uses: dawidd6/action-send-mail@v6
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME}}
+          password: ${{ secrets.EMAIL_PASSWORD}}
+          subject: Poenix Inwarranty flow test notifications
+          to: dhakla.monika@gmail.com
+          from: ${{ secrets.EMAIL_USERNAME}}
+          body: |
+                Hello
+                Please find attached html report generated after running collection through GitHub actions.
+                is: https://rsmonika.github.io/Phoenix-Inwarranty-Flow/          
+          
+  
+
 
           
         
